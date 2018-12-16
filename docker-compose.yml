@@ -18,10 +18,8 @@ services:
       - db
     volumes:
       - ./data/nextcloud:/var/www/html
-    environment:
-      - VIRTUAL_HOST=cloud.nguyenantoine.com
-      - LETSENCRYPT_HOST=cloud.nguyenantoine.com
-      - LETSENCRYPT_EMAIL=antoine.ngu@outlook.fr
+    env_file:
+      - .env
     networks:
       - default
       - reverse-proxy
