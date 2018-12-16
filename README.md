@@ -1,6 +1,6 @@
 # NextCloud docker-compose
 
-[Using NextCloud Docker Image](https://docs.gitlab.com/omnibus/docker/)
+[Using NextCloud Docker Image](https://github.com/nextcloud/docker)
 
 ## Installation
 
