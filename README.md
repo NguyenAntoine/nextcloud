@@ -16,3 +16,24 @@ docker-compose up -d
 ```bash
 ./updateDockerImages.sh
 ```
+
+## Increase file size
+
+In order to increase file size uploading :
+
+You have to update the php.ini in the nextcloud app and update theses lines :
+
+```ini
+post_max_size = 1000M
+
+upload_max_filesize = 1000M
+```
+
+You have to update the nginx.conf in the nginx-proxy and add this line :
+
+```
+http {
+    ...
+    client_max_body_size 1000M;
+}
+```
