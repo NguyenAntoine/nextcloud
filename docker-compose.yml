@@ -24,6 +24,12 @@ services:
       - default
       - reverse-proxy
     restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+		- db:db
+	ports:
+		- 8988:80
 networks:
   reverse-proxy:
     external: true
