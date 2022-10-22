@@ -12,7 +12,7 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
   app:
-    image: nextcloud:22
+    image: nextcloud:23
     expose:
       - 80
     depends_on:
