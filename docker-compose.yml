@@ -3,6 +3,7 @@ services:
   db:
     image: mariadb:10.5
     restart: always
+    #command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - ./data/db:/var/lib/mysql
     environment:
@@ -11,13 +12,19 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
   app:
-    image: nextcloud:21
+    image: nextcloud:22
     expose:
       - 80
     depends_on:
       - db
     volumes:
       - ./data/nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=mysqlpassword
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - PHP_UPLOAD_LIMIT=2048M
     env_file:
       - .env
     networks:
