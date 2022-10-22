@@ -6,13 +6,13 @@ services:
     #command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - ./data/db:/var/lib/mysql
+    env_file:
+      - .env
     environment:
-      - MYSQL_ROOT_PASSWORD=mysqlpassword
-      - MYSQL_PASSWORD=mysqlpassword
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
   app:
-    image: nextcloud:23
+    image: nextcloud:24
     expose:
       - 80
     depends_on:
@@ -20,7 +20,6 @@ services:
     volumes:
       - ./data/nextcloud:/var/www/html
     environment:
-      - MYSQL_PASSWORD=mysqlpassword
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
