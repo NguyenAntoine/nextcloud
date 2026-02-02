@@ -24,8 +24,6 @@ LETSENCRYPT_HOST=your-domain.com
 LETSENCRYPT_EMAIL=your-email@example.com
 MYSQL_ROOT_PASSWORD=<strong-password>
 MYSQL_PASSWORD=<strong-password>
-NEXTCLOUD_ADMIN_USER=admin
-NEXTCLOUD_ADMIN_PASSWORD=<strong-password>
 ```
 
 **Generate strong passwords:**
@@ -52,7 +50,7 @@ docker compose logs -f app
 ### 3. Verify Installation
 
 - Open `https://your-domain.com`
-- Login with credentials from `.env`
+- Create admin account on first access
 - Verify files are present
 
 ---
