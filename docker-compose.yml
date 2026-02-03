@@ -24,7 +24,7 @@ services:
     restart: always
 
   app:
-    image: nextcloud:32
+    image: nextcloud:31
     container_name: nextcloud_app
     restart: always
     expose:
