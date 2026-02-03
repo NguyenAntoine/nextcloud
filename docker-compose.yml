@@ -20,7 +20,7 @@ services:
       - default
 
   app:
-    image: nextcloud:28
+    image: nextcloud:29
     container_name: nextcloud_app
     restart: always
     expose:
