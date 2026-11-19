@@ -3,7 +3,7 @@ services:
     image: mariadb:11.8
     container_name: nextcloud_db
     restart: always
-    # command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-log-file-size=256M
     volumes:
       - ./data/db:/var/lib/mysql
     environment:
@@ -44,6 +44,8 @@ services:
       - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
       - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
       - REDIS_HOST=redis
+      - TRUSTED_PROXIES=172.18.0.0/16
+      - OVERWRITEPROTOCOL=https
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/status.php"]
       interval: 30s
@@ -52,6 +54,19 @@ services:
     networks:
       - default
       - reverse-proxy
+
+  cron:
+    image: nextcloud:35
+    container_name: nextcloud_cron
+    restart: always
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./data/nextcloud:/var/www/html
+    networks:
+      - default
 
   # PhpMyAdmin: Optional admin tool
   # Uncomment to enable, but recommend using SSH tunnel instead for security
