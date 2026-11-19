@@ -3,7 +3,7 @@ services:
     image: mariadb:11.8
     container_name: nextcloud_db
     restart: always
-    # command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-log-file-size=256M
     volumes:
       - ./data/db:/var/lib/mysql
     environment:
@@ -44,6 +44,8 @@ services:
       - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
       - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
       - REDIS_HOST=redis
+      - TRUSTED_PROXIES=172.18.0.0/16
+      - OVERWRITEPROTOCOL=https
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/status.php"]
       interval: 30s
