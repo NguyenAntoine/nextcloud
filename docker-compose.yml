@@ -55,6 +55,19 @@ services:
       - default
       - reverse-proxy
 
+  cron:
+    image: nextcloud:35
+    container_name: nextcloud_cron
+    restart: always
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./data/nextcloud:/var/www/html
+    networks:
+      - default
+
   # PhpMyAdmin: Optional admin tool
   # Uncomment to enable, but recommend using SSH tunnel instead for security
   # phpmyadmin:
